@@ -1,15 +1,14 @@
 package com.nixsolutions.ponarin.dom;
 
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Test;
-import org.w3c.dom.Document;
 
 import static org.custommonkey.xmlunit.XMLAssert.*;
 
 import java.io.File;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.FileReader;
+import java.io.Reader;
 
 public class DomHandlerTest {
     private DomHandler domHandler;
@@ -17,32 +16,21 @@ public class DomHandlerTest {
     @Before
     public void setUp() {
         domHandler = new DomHandler();
-    }
-    
-    @Test
-    public void te() {
-        File file = new File("resultDom.xml");
-        System.out.println(file.exists());
-        
-        File file2 = new File("src/test/resources/source.xml");
-        System.out.println(file2.exists());
+        XMLUnit.setIgnoreComments(true);
+        XMLUnit.setIgnoreWhitespace(true);
     }
 
     @Test
     public void testRemovEevenElements() throws Exception {
-        domHandler.removeEevenElements("source.xml", "resultDom.xml");
+        File sourceFile = new File("src/test/resources/source.xml");
+        File destFile = new File("src/test/resources/resultDom.xml");
+        File expectedFile = new File("src/test/resources/expectedDom.xml");
 
-        Document source = getDocument("source.xml");
-        Document result = getDocument("resultDom.xml");
+        domHandler.removeEevenElements(sourceFile, destFile);
 
-        assertXMLEqual(source, result);
+        Reader expectedReader = new FileReader(expectedFile);
+        Reader destReader = new FileReader(destFile);
 
-        // domHandler.removeEevenElements("sourceWrong.xml", "resultDom.xml");
-    }
-
-    private Document getDocument(String name) throws Exception {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        return db.parse(getClass().getClassLoader().getResourceAsStream(name));
+        assertXMLEqual(expectedReader, destReader);
     }
 }

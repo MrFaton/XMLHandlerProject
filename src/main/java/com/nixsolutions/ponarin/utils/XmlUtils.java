@@ -1,5 +1,6 @@
 package com.nixsolutions.ponarin.utils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -11,7 +12,7 @@ import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
 
 public class XmlUtils {
-    public void save(Document doc, String name) throws FileNotFoundException {
+    public void save(Document doc, File dest) throws FileNotFoundException {
         DOMImplementation impl = doc.getImplementation();
         DOMImplementationLS implLs = (DOMImplementationLS) impl.getFeature("LS",
                 "3.0");
@@ -19,7 +20,7 @@ public class XmlUtils {
         ser.getDomConfig().setParameter("format-pretty-print", true);
         LSOutput out = implLs.createLSOutput();
         out.setEncoding("UTF-8");
-        out.setByteStream(new FileOutputStream(name));
+        out.setByteStream(new FileOutputStream(dest));
         ser.write(doc, out);
     }
 

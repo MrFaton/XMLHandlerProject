@@ -1,5 +1,6 @@
 package com.nixsolutions.ponarin.dom;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +21,19 @@ public class DomHandler {
             .getLogger(DomHandler.class);
     private XmlUtils xmlUtils = new XmlUtils();
 
-    public void removeEevenElements(String sourceFileName,
-            String destFileName) {
+    public void removeEevenElements(File sourse, File dest) {
         logger.trace(
-                "remove even elements for file with name: " + sourceFileName);
+                "remove even elements for file with name: " + sourse.getName());
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(getClass().getClassLoader()
-                    .getResourceAsStream(sourceFileName));
+            Document doc = db.parse(sourse);
 
             Element element = doc.getDocumentElement();
 
             removeEven(element);
 
-            xmlUtils.save(doc, destFileName);
+            xmlUtils.save(doc, dest);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             throw new RuntimeException();
