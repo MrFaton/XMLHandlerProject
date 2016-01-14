@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<card_holder>
+    <card>
+        <words>
+            <word>word1</word>
+            <word>word3</word>
+        </words>
+        <example>example1</example>
+    </card>
+    <card>
+        <words>
+            <word>word1</word>
+            <word>word3</word>
+        </words>
+        <example>example3</example>
+    </card>
+    <card>
+        <words>
+            <word>word1</word>
+            <word>word3</word>
+        </words>
+        <example>example5</example>
+    </card>
+    <card>
+        <words>
+            <word>word1</word>
+            <word>word3</word>
+        </words>
+        <example>example7</example>
+    </card>
+    <card>
+        <words>
+            <word>word1</word>
+            <word>word3</word>
+        </words>
+        <example>example9</example>
+    </card>
+</card_holder>
