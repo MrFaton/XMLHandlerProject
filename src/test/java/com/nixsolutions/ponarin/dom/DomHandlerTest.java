@@ -1,10 +1,11 @@
 package com.nixsolutions.ponarin.dom;
 
 import org.custommonkey.xmlunit.XMLUnit;
+import static org.custommonkey.xmlunit.XMLAssert.*;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.custommonkey.xmlunit.XMLAssert.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -32,5 +33,21 @@ public class DomHandlerTest {
         Reader destReader = new FileReader(destFile);
 
         assertXMLEqual(expectedReader, destReader);
+    }
+
+    @Test(expected = Exception.class)
+    public void testRemovEevenElementsWithNonExistsFile() throws Exception {
+        File sourceFile = new File("src/test/resources/nonExists.xml");
+        File destFile = new File("src/test/resources/resultDom.xml");
+        domHandler.removeEevenElements(sourceFile, destFile);
+        Assert.fail("must be thrown RuntimeException");
+    }
+
+    @Test(expected = Exception.class)
+    public void testRemovEevenElementsWithInvalidFile() throws Exception {
+        File sourceFile = new File("src/test/resources/sourceInvalid.xml");
+        File destFile = new File("src/test/resources/resultDom.xml");
+        domHandler.removeEevenElements(sourceFile, destFile);
+        Assert.fail("must be thrown RuntimeException");
     }
 }
