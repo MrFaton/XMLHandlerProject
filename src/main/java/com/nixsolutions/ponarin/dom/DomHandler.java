@@ -24,7 +24,7 @@ public class DomHandler {
     private static final Logger logger = LoggerFactory
             .getLogger(DomHandler.class);
 
-    public void removeEevenElements(File sourse, File dest) throws Exception {
+    public void removeEvenElements(File sourse, File dest) throws Exception {
         logger.trace(
                 "remove even elements for file with name: " + sourse.getName());
         try {

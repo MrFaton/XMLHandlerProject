@@ -56,7 +56,7 @@ public class EventElementHandler extends DefaultHandler {
 
         elementsPerLevel.put(level, elementsPerLevel.get(level) + 1);
 
-        if (isEven(level)) {
+        if (isOdd(level)) {
             saveText(lineDelimeter);
             saveOpenTag(localName, qName, attributes);
         }
@@ -65,8 +65,8 @@ public class EventElementHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
-        if (isEven(level)) {
-            if (!qName.equals(prevTagName)) {
+        if (isOdd(level)) {
+            if (!(localName + qName).equals(prevTagName)) {
                 saveText(lineDelimeter);
 
                 for (int i = 0; i < level; i++)
@@ -83,7 +83,7 @@ public class EventElementHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length)
             throws SAXException {
         String text = new String(ch, start, length);
-        if (isEven(level) && text.trim().length() > 0) {
+        if (isOdd(level) && text.trim().length() > 0) {
             saveText(text.trim());
         }
     }
@@ -92,7 +92,7 @@ public class EventElementHandler extends DefaultHandler {
         this.destFile = destFile;
     }
 
-    private boolean isEven(int level) {
+    private boolean isOdd(int level) {
         for (int i = level; i > 0; i--) {
             if (elementsPerLevel.get(i) % 2 == 0) {
                 return false;
