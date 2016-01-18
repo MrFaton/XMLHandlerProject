@@ -24,13 +24,13 @@ public class DomHandler {
     private static final Logger logger = LoggerFactory
             .getLogger(DomHandler.class);
 
-    public void removeEvenElements(File sourse, File dest) throws Exception {
+    public void removeEvenElements(File source, File dest) throws Exception {
         logger.trace(
-                "remove even elements for file with name: " + sourse.getName());
+                "remove even elements for file with name: " + source.getName());
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(sourse);
+            Document doc = db.parse(source);
 
             Element element = doc.getDocumentElement();
 

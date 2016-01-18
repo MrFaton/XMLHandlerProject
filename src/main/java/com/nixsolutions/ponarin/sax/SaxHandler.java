@@ -16,6 +16,8 @@ public class SaxHandler {
             .getLogger(SaxHandler.class);
 
     public void removeEvenElements(File source, File dest) throws Exception {
+        logger.trace(
+                "remove even elements for file with name: " + source.getName());
         EventElementHandler elementHandler = new EventElementHandler();
         elementHandler.setDestFile(dest);
         SAXParserFactory saxFactory = SAXParserFactory.newInstance();
